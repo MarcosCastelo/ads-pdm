@@ -4,6 +4,12 @@
 
 import 'package:flutter/material.dart';
 
+enum Status {
+    None,
+    Like,
+    Dislike
+}
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -30,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _like_state = '';
+  var _likeState = Status.None;
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           FlatButton.icon(
-              color: this._like_state == 'like' ? Colors.blue : Colors.white,
+              color: this._likeState == Status.Like ? Colors.blue : Colors.transparent,
               icon: Icon(Icons.thumb_up),
               label: Text('like'),
               onPressed: () {
-                setState(() => this._like_state = 'like');
+                setState(() => this._likeState = Status.Like);
               }),
           SizedBox(width: 100),
           FlatButton.icon(
-              color: this._like_state == 'dislike' ? Colors.red : Colors.white,
+              color: this._likeState == Status.Dislike ? Colors.red : Colors.transparent,
               icon: Icon(Icons.thumb_down),
               label: Text('dislike'),
               onPressed: () {
-                setState(() => this._like_state = 'dislike');
+                setState(() => this._likeState = Status.Dislike);
               }),
         ]),
       ),
     );
   }
 }
-
